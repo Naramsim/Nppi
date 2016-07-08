@@ -1,0 +1,51 @@
+{
+  "name": "nppi",
+  "version": "0.2.7",
+  "description": "parses .js files finding required/imported packages, then it install them. Useful if you have downloaded some piece of code without any package.json",
+  "scripts": {
+    "build": "webpack -p",
+    "build:watch": "webpack -p --watch",
+    "test": "xo"
+  },
+  "keywords": [
+    "package",
+    "install",
+    "require",
+    "automatically",
+    "import",
+    "nppi"
+  ],
+  "author": "Alessandro Pezzé <igougi.ui@gmail.com> (https://github.com/Naramsim)",
+  "license": "MPL-2.0",
+  "bin": "cli.js",
+  "files": [
+    "index.js",
+    "cli.js"
+  ],
+  "devDependencies": {
+    "babel-core": "^6.10.4",
+    "babel-loader": "^6.2.4",
+    "babel-preset-es2015": "^6.9.0",
+    "webpack": "^1.13.1",
+    "xo": "^0.16.0"
+  },
+  "xo": {
+    "envs": [
+      "node"
+    ],
+    "ignores": [
+      "test/**/*",
+      "index.js"
+    ],
+    "esnext": true,
+    "space": 4,
+    "rules": {
+      "linebreak-style": 0
+    }
+  },
+  "dependencies": {
+    "decamelize": "^1.2.0",
+    "meow": "^3.7.0",
+    "update-notifier": "^1.0.2"
+  }
+}
