@@ -13,6 +13,14 @@ const nativeModules = ['assert', 'child_process', 'cluster', 'http',
 const requireRe =
     new RegExp(`(?:require|\\sfrom)\\s?${quotes}{1,2}([\\w\\.\\-\\_]+?)${quotes}{1,2}`, 'g');
 
+/**
+ * based on given input 'toParse',
+ * starts is parsing
+ * flags Array is passed to other functions
+ *
+ * @param {Object} flags
+ * @param {Array} toParse
+ */
 function parse(flags, toParse) {
     try {
         if (toParse.length === 0) {
@@ -36,6 +44,15 @@ function parse(flags, toParse) {
     }
 }
 
+/**
+ * Reads each file in the 'dir' directory,
+ * invokes 'parseAndAdd()' for each of them.
+ * If a 'recursive' flag is set,
+ * it invokes himself with the new dir found
+ *
+ * @param {Object} flags
+ * @param {String} dir
+ */
 function parseDir(flags, dir = '.') {
     try {
         if (!excludedDirs.includes(dir)) {
@@ -56,6 +73,11 @@ function parseDir(flags, dir = '.') {
     }
 }
 
+/**
+ * Starts the parsing for a single file
+ *
+ * @param {String} file
+ */
 function parseFile(file = 'index.js') {
     try {
         const fileStat = fs.statSync(file);
@@ -71,6 +93,12 @@ function parseFile(file = 'index.js') {
     }
 }
 
+/**
+ * Parses a string appling to it the regex 'requireRe',
+ * for each match invokes 'checkAndAdd()' with a package name
+ *
+ * @param {String} text
+ */
 function parseAndAdd(text) {
     let match = requireRe.exec(text);
     if (match && match[1]) {
@@ -84,6 +112,12 @@ function parseAndAdd(text) {
     }
 }
 
+/**
+ * Checks if the current package 'value' is non-native,
+ * if so, adds it to the 'packages' Set
+ *
+ * @param {Object} value
+ */
 function checkAndAdd(value) {
     if (value && packages) {
         if (!nativeModules.includes(value)) {

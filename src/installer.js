@@ -1,6 +1,13 @@
 const exec = require('child_process').exec;
 const decamelize = require('decamelize');
 
+/**
+ * run several 'npm install' commands,
+ * one for each module with the flags passed
+ *
+ * @param {Object} flags
+ * @param {Array} modules
+ */
 function install(flags, modules) {
     if (modules && modules.size > 0) {
         console.log(`The following packages will be installed: ${[...modules].join(', ')}`);

@@ -3,6 +3,7 @@ Node Packages Parser Installer ![License](https://img.shields.io/badge/License-M
 
 [![XO code style](https://img.shields.io/badge/code_style-XO-5ed9c7.svg)](https://github.com/sindresorhus/xo)
 [![Build Status](https://travis-ci.org/Naramsim/Nppi.svg?branch=master)](https://travis-ci.org/Naramsim/Nppi)
+[![Inline docs](http://inch-ci.org/github/Naramsim/nppi.svg?branch=master)](http://inch-ci.org/github/Naramsim/nppi)
 
 `nppi` is a tool that lets you parse files searching for their dependencies and install them.
 Really useful if you have downloaded a project or a file without its `package.json`.
