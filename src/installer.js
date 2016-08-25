@@ -1,8 +1,8 @@
-const exec = require('child_process').exec;
+const execSync = require('child_process').execSync;
 const decamelize = require('decamelize');
 
 /**
- * run several 'npm install' commands,
+ * runs several 'npm install' commands,
  * one for each module with the flags passed
  *
  * @param {Object} flags
@@ -16,15 +16,9 @@ function install(flags, modules) {
                 return `--${decamelize(flag, '-')}`;
             })
             .join(' ');
+
         modules.forEach(module => {
-            exec(`npm install ${module} ${opts}`, error => {
-                if (error) {
-                    console.log(`${module} unsuccesfully installed`);
-                    console.error(error);
-                } else {
-                    console.log(`${module} succesfully installed`);
-                }
-            });
+            execSync(`npm install ${module} ${opts}`, {encoding: 'utf8', stdio: [0, 1, 2]});
         });
     } else {
         console.log('Nothing to install');

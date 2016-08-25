@@ -41,6 +41,7 @@ function parse(flags, toParse) {
         return packages;
     } catch (err) {
         console.log('No files/dir matches input');
+        console.log(err);
     }
 }
 
@@ -55,7 +56,7 @@ function parse(flags, toParse) {
  */
 function parseDir(flags, dir = '.') {
     try {
-        if (!excludedDirs.includes(dir)) {
+        if (excludedDirs.indexOf(dir) === -1) {
             const files = fs.readdirSync(dir);
             files.forEach(element => {
                 const elegible = path.join(dir, element);
