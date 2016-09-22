@@ -1,5 +1,6 @@
 import * as fs from 'fs';
 import * as path from 'path';
+import glob from 'glob';
 
 const packages = new Set();
 const quotes = '["\'`´()]';
@@ -24,18 +25,15 @@ const requireRe =
 function parse(flags, toParse) {
     try {
         if (toParse.length === 0) {
-            toParse = ['.'];
+            toParse = ['./*'];
         }
-        toParse.forEach(elegible => {
-            const fileStat = fs.statSync(elegible);
-            if (fileStat) {
-                if (fileStat.isFile()) {
-                    parseFile(elegible);
-                } else if (fileStat.isDirectory()) {
-                    parseDir(flags, elegible);
-                } else {
-                    console.log('Input not processable');
-                }
+        const files = glob.sync(toParse[0]);
+        files.forEach(file => {
+            const allowed = excludedDirs.every(excludedDir => {
+                return file.indexOf(excludedDir) === -1;
+            });
+            if (allowed) {
+                parseFile(file);
             }
         });
         return packages;

@@ -18,7 +18,7 @@ npm install nppi -g
 #### Usage
 
 ```shell
-nppi <file|dir> [options]
+nppi <pattern> [options]
 ```
 
 #### Options
@@ -27,8 +27,6 @@ nppi <file|dir> [options]
 
 `--save-dev` adds the packages to a package.json as dev-dependencies
 
-`--recursive` recursively parse folders.
-
 #### Blacklist
 
 Files contained in `node_modules` and `bower_components` will never be parsed.
@@ -36,8 +34,8 @@ Files contained in `node_modules` and `bower_components` will never be parsed.
 #### Examples
 
 ```shell
-nppi .                         # parses the entire current folder
-nppi ./project                 # parses project folder
+nppi ./*.js                    # parses every .js file in the current folder
+nppi ./project/**/*.jsx        # parses project folder and all folders inside it looking for .jsx files
 nppi gulpfile.js --save-dev    # parses gulpfile.js file only, updates package.json
-nppi . --recursive --save      # parses current folder and all folders inside it, updates package.json
+nppi **/*.js --save            # parses current folder and all folders inside it, updates package.json
 ```
